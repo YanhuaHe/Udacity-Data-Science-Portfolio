@@ -1,0 +1,174 @@
+﻿  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Titanic Survival by Gender</title>
+      <style>
+
+      .axis--x text {
+        font:20px sans-serif;
+      }
+
+      .axis line,
+      .axis path {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+          stroke-width: 2
+      }
+
+      </style>
+    </head>
+
+    <body>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script>
+
+    var margin = {top: 20, right: 50, bottom: 30, left: 20},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([margin.left, width],0.4);
+
+    var y = d3.scale.linear()
+        .rangeRound([height,margin.top]);
+
+    var colorRange = d3.scale.category20();
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+margin.left+","+margin.top+")");
+
+    var h2 = d3.select("svg")
+               .append("text")
+               .text("Titanic Passengers Information")
+               .attr("transform","translate("+(width/2-margin.left-margin.right)+","+margin.top+")")
+               .attr("class","header")
+               .attr("font-size",25);
+
+
+      // Transpose the data into layers
+     d3.csv("cabin_class_survival.csv", function(data) {
+                console.log(data);
+
+            var status = ["Survived", "Dead"];
+
+            var layers = d3.layout.stack()(status.map(function(c) {
+              return data.map(function(d) {
+                return {
+                  x : d.Cabin_class,
+                  y : +d[c]
+                };
+              });
+            }));
+            console.log(layers);
+
+      x.domain(layers[0].map(function(d) { return d.x; }));
+      y.domain([0, d3.max(layers[layers.length - 1], function(d) { return d.y0 + d.y; })]).nice();
+
+      var layer = svg.selectAll(".layer")
+          .data(layers)
+          .enter()
+          .append("g")
+          .attr("class", "layer")
+          .style("fill", function(d, i) { return colorRange(i); });
+
+      var rect =  layer.selectAll("rect")
+          .data(function(d) { return d;})
+          .enter()
+          .append("rect")
+          .attr("x", function(d) { return x(d.x); })
+          .attr("y", function(d) { return y(d.y + d.y0); })
+          .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+          .attr("width", x.rangeBand())
+          .on("mouseover", function() { tooltip.style("display", null);})
+          .on("mousemove", function(d) {
+            var xPosition = d3.mouse(this)[0] - 15;
+            var yPosition = d3.mouse(this)[1] - 25;
+                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                 tooltip.select("text").text("Count: "+d.y);})
+          .on("mouseout", function() { tooltip.style("display", "none");});
+
+      // add axis
+      svg.append("g")
+          .attr("class", "axis axis--x")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("text")
+          .attr("text-anchor","middle")
+          .attr("transform","translate("+(width-margin.right)+","+(height+margin.bottom)+")")
+          .style("font-size",20)
+          .text("Cabin Class");
+
+      svg.append("g")
+          .attr("class", "axis axis--y")
+          .attr("transform", "translate("+margin.left+","+0+")")
+          .call(yAxis)
+          .append("text")
+          .attr("text-anchor","end")
+          .attr("transform","translate("+margin.left+","+margin.top+")rotate(-90)")
+          .style("font-size",20)
+          .text("# of Passengers");
+
+      // add a legend
+
+      console.log(colorRange.domain().slice().reverse())
+
+      var legend = svg.selectAll(".legend")
+          .data(colorRange.domain().slice().reverse())
+          .enter()
+          .append("g")
+          .attr("class", "legend")
+          .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+      legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", colorRange)
+
+      legend.append("text")
+            .attr("x", width - 20)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function(d, i) { switch (i) {
+              case 0: return "Dead";
+              case 1: return "Survived"; }});
+
+      var tooltip = svg.append("g")
+        .attr("class", "tooltip")
+        .style("display", "none");
+
+      tooltip.append("rect")
+        .attr("width", 65)
+        .attr("height", 20)
+        .attr("fill", "white")
+        .style("opacity", 0.5);
+
+      tooltip.append("text")
+        .attr("x", 30)
+        .attr("dy", "1.2em")
+        .style("text-anchor", "middle")
+        .attr("font-size", "12px")
+        .attr("font-weight", "bold");
+      });
+
+      // Prep the tooltip bits, initial display is hidden
+
+
+    </script>
+    </body>
+  </html>

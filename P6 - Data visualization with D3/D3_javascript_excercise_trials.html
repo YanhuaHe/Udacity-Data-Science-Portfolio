@@ -1,0 +1,21 @@
+﻿ <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Trials</title>
+    </head>
+    <body>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script>
+      var data = d3.csv.parse("cabin_class_survival.csv", function(d) {
+          return {
+          cabin_class: d.Cabin_class,
+          survived: +d.Survived,
+          dead: +d.Dead,
+          total: +d.Total
+    };
+});
+
+    </script>
+    </body>
+  </html>
