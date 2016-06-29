@@ -10,5 +10,5 @@ This repository contains my projects for Udacity's Data Analyst Nanodegree progr
 - Project 3: [Wrangle San Jose OpenStreetMaps Data](https://github.com/YanhuaHe/Udacity-Data-Analyst-Nanodegree/blob/master/P3%20-%20Wrangle%20OpenStreetMap%20Data/Data%20Wrangling%20with%20MongoDB.ipynb) 
 - Project 4: [Explore and Summarize Prosper Loan Data with R](https://github.com/YanhuaHe/Udacity-Data-Science-Portfolio/tree/master/P4%20-%20Exploratory%20Data%20Analysis%20With%20R)
 - Project 5: [Identifying Fraud from Enron Email](https://github.com/YanhuaHe/Udacity-Data-Science-Portfolio/tree/master/P5%20-%20Identify%20Fraud%20from%20Enron%20Email)
-- Project 6: Tell Stories with Data Visualization
+- Project 6: [Tell Stories with Data Visualization](https://github.com/YanhuaHe/Udacity-Data-Science-Portfolio/tree/master/P6%20-%20Data%20Visualization%20with%20D3)
 - Project 7: Design and Analyze an A/B Test
