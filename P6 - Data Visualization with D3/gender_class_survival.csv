@@ -1,0 +1,4 @@
+Cabin_class,Female_Survived,Female_Dead,Female_Total,Female_Survived_Rate,Female_Dead_Rate,Male_Survived,Male_Dead,Male_Total,Male_Survived_Rate,Male_Dead_Rate
+First,91,3,94,0.97,0.03,45,77,122,0.37,0.63
+Second,70,6,76,0.92,0.08,17,91,108,0.16,0.84
+Third,72,72,144,0.5,0.5,47,300,347,0.14,0.86

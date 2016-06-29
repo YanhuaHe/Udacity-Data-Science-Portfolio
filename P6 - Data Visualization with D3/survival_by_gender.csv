@@ -1,0 +1,3 @@
+Sex,Survived,Dead,Total,Survived_rate,Dead_rate
+Female,233,81,314,0.74,0.26
+Male,109,468,577,0.19,0.81
