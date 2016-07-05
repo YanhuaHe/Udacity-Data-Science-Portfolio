@@ -1,6 +1,21 @@
 # Data Analyst Nanodegree Portfolio
 
-This repository contains my projects for Udacity's Data Analyst Nanodegree program.
+This repository contains my projects for [Udacity's Data Analyst Nanodegree program](https://www.udacity.com/course/data-analyst-nanodegree--nd002)
+
+![certificate](https://github.com/YanhuaHe/Udacity-Data-Science-Portfolio/blob/master/certificate.jpg)
+
+# Courses including:
+
+- Descriptive Statistics
+- Inferential Statistics
+- Intro to Data Science
+- Data Wrangling with MongoDB
+- Data Analysis with R
+- Intro to Machine Learning
+- Data Visualization and D3.js
+- A/B Testing
+- Intro to html and CSS
+- JavaScript Basics
 
 # Projects including:
 
